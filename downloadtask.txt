@@ -1,0 +1,130 @@
+package com.lacherez.matthieu.meteo;
+
+import android.os.AsyncTask;
+import android.util.Log;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+
+/**
+ * Created by matt on 21/03/2017.
+ */
+
+public class DownloadFilesTask extends AsyncTask<String, Void, ArrayList<MeteoDate>> {
+
+    private String jour;
+    private String date;
+    private String p_matin;
+    private String t_matin;
+    private String v_matin;
+    private String preci_matin;
+    private String p_midi;
+    private String t_midi;
+    private String v_midi;
+    private String preci_midi;
+    private String p_apmidi;
+    private String t_apmidi;
+    private String v_apmidi;
+    private String preci_apmidi;
+    private String p_soir;
+    private String t_soir;
+    private String v_soir;
+    private String preci_soir;
+
+    @Override
+    protected ArrayList<MeteoDate> doInBackground(String... params) {
+        URL url = null;
+        ArrayList<MeteoDate> list = new ArrayList();
+        try {
+            url = new URL(params[0]);
+
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            if (urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+                factory.setNamespaceAware(true);
+                XmlPullParser xpp = factory.newPullParser();
+                xpp.setInput(urlConnection.getInputStream(), "UTF-8");
+                while (xpp.getEventType() != XmlPullParser.END_DOCUMENT) {
+                    if ((xpp.getEventType() == XmlPullParser.START_TAG)) {
+                        if (xpp.getName().equals("jour")){
+                            jour = xpp.nextText();
+                        }
+                        if (xpp.getName().equals("date")) {
+                            date = xpp.nextText();
+                        }
+                        if (xpp.getName().equals("pictos_matin")) {
+                            p_matin = xpp.nextText();
+                        }
+                        if (xpp.getName().equals("tempe_matin")) {
+                            t_matin = xpp.nextText();
+                        }
+                        if (xpp.getName().equals("precipitations_matin")) {
+                            preci_matin = xpp.nextText();
+                        }
+                        if (xpp.getName().equals("vent_matin")) {
+                            v_matin = xpp.nextText();
+                        }
+                        if (xpp.getName().equals("pictos_midi")) {
+                            p_midi = xpp.nextText();
+                        }
+                        if (xpp.getName().equals("tempe_midi")) {
+                            t_midi = xpp.nextText();
+                        }
+                        if (xpp.getName().equals("precipitations_midi")) {
+                            preci_midi = xpp.nextText();
+                        }
+                        if (xpp.getName().equals("vent_midi")) {
+                            v_midi = xpp.nextText();
+                        }
+                        if (xpp.getName().equals("pictos_apmidi")) {
+                            p_apmidi = xpp.nextText();
+                        }
+                        if (xpp.getName().equals("tempe_apmidi")) {
+                            t_apmidi = xpp.nextText();
+                        }
+                        if (xpp.getName().equals("precipitations_apmidi")) {
+                            preci_apmidi = xpp.nextText();
+                        }
+                        if (xpp.getName().equals("vent_apmidi")) {
+                            v_apmidi = xpp.nextText();
+                        }
+                        if (xpp.getName().equals("pictos_soir")) {
+                            p_soir = xpp.nextText();
+                        }
+                        if (xpp.getName().equals("tempe_soir")) {
+                            t_soir = xpp.nextText();
+                        }
+                        if (xpp.getName().equals("precipitations_soir")) {
+                            preci_soir = xpp.nextText();
+                        }
+                        if (xpp.getName().equals("vent_soir")) {
+                            v_soir = xpp.nextText();
+                        }
+                    }
+                    if ((xpp.getEventType() == XmlPullParser.END_TAG)) {
+                        if (xpp.getName().equals("item")) {
+                            list.add(new MeteoDate(jour, date, p_matin, t_matin, v_matin, preci_matin, p_midi, t_midi, v_midi, preci_midi, p_apmidi, t_apmidi, v_apmidi, preci_apmidi, p_soir, t_soir, v_soir, preci_soir));
+                        }
+                    }
+                    xpp.next();
+                }
+                urlConnection.disconnect();
+            }
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+}
