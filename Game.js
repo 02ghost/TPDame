@@ -3,9 +3,9 @@
     var tab=['r','n','b','q','k','b','n','r','p'];
     var color;
     var img;
-    for (let n=0;n<8;n++){
+    for (let n=0;n<10;n++){
         o+='<tr>';
-        for(let b=0;b<8;b++){
+        for(let b=0;b<10;b++){
             if((n+b)%2==0)
                 color = 'blanc';
             else
