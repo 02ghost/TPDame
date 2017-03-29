@@ -35,13 +35,28 @@ window.onload =  function(){
     }
 
 document.getElementById('plateau').innerHTML = o;
-    
+    var click=false;
+    var click2=false;
 $('img')
     .mouseover(function() {
-$(this).parent().attr('class', 'select')
-})
-.mouseout(function() {
-$(this).parent().attr('class', 'blanc')
-});
+        $(this).parent().attr('class', 'select')
+    })
+    .mouseout(function() {
+    if(!click)
+        $(this).parent().attr('class', 'blanc')
+    })
+    .mouseup(function(){
+        if(click){
+        $('.possible').attr('class', 'blanc')
+        $('.select').attr('class', 'blanc')
+        }
+        $(this).parent().attr('class', 'possible')
+        $('#c1-l1').attr('class','possible')
+        click=true;
+    })
+    /*.mousedown(function(){
+        $(this).parent().attr('class', 'blanc')
+        $('#c1-l1').attr('class','blanc')
+    });*/
     
    };
