@@ -1,3 +1,4 @@
+window.onload =  function(){
     var o="<table border=1>"
     var i=0;
     var color;
@@ -18,19 +19,25 @@
             if(n==2)
                 img = '<img src="Images/NPion.png" width=40px height=40px >';
             if(n==9)
-                img = '<img onmouseover="action(this.id)" src="Images/BPion.png" width=40px height=40px>';
+                img = '<img src="Images/BPion.png" width=40px height=40px>';
             if(n==8)
-                img = '<img onmouseover="action(this.id)" src="Images/BPion.png" width=40px height=40px>';
+                img = '<img src="Images/BPion.png" width=40px height=40px>';
             if(n==7)
-                img = '<img onmouseover="action(this.id)" src="Images/BPion.png" width=40px height=40px>';
+                img = '<src="Images/BPion.png" width=40px height=40px>';
             }
             o=o+'<td id =c'+n+'-l'+b+' class = '+color+'>'+img+'</td>'; 
         }
         o+='</tr>'; 
     }
-    
-    document.getElementById('plateau').innerHTML = o;
 
-    function action() {
-        console.log(this);
-    }
+document.getElementById('plateau').innerHTML = o;
+    
+$('img')
+    .mouseover(function() {
+console.log("Selection");
+})
+.mouseout(function() {
+console.log("Deselection");
+});
+    
+   };
