@@ -36,22 +36,23 @@ window.onload =  function(){
 
 document.getElementById('plateau').innerHTML = o;
     var click=false;
-    var click2=false;
+    
 $('img')
     .mouseover(function() {
+    if(!click)
         $(this).parent().attr('class', 'select')
     })
     .mouseout(function() {
     if(!click)
         $(this).parent().attr('class', 'blanc')
+    click=false;
     })
     .mouseup(function(){
-        if(click){
+        if(!click){
         $('.possible').attr('class', 'blanc')
         $('.select').attr('class', 'blanc')
         }
         $(this).parent().attr('class', 'possible')
-        $('#c1-l1').attr('class','possible')
         click=true;
     })
     /*.mousedown(function(){
