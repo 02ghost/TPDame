@@ -20,7 +20,11 @@ window.onload =  function(){
                 img = '<img src="Images/NPion.png" width=40px height=40px >';
             if(n==9)
                 img = '<img src="Images/BPion.png" width=40px height=40px>';
+            if(n==3)
+                img = '<img src="Images/BPion.png" width=40px height=40px>';
             if(n==8)
+                img = '<img src="Images/BPion.png" width=40px height=40px>';
+            if(n==6)
                 img = '<img src="Images/BPion.png" width=40px height=40px>';
             if(n==7)
                 img = '<img src="Images/BPion.png" width=40px height=40px>';
