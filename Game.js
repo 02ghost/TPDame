@@ -34,10 +34,10 @@ document.getElementById('plateau').innerHTML = o;
     
 $('img')
     .mouseover(function() {
-$('this.parent.class').html("select");
+$(this).parent().attr('class', 'select')
 })
 .mouseout(function() {
-$('this.parent.class').html("blanc");
+$(this).parent().attr('class', 'blanc')
 });
     
    };
