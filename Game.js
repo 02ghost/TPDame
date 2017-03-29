@@ -10,18 +10,20 @@
             else
                 color = 'noir';
             img="";
+            if((n+b)%2==0){
             if(n==0)
-                img = '<img src="Images/Npion.png">';
+                img = '<img src="Images/NPion.png" width=40px height=40px>';
             if(n==1)
-               img = '<img src="Images/Npion.png">';
+               img = '<img src="Images/NPion.png" width=40px height=40px>';
             if(n==2)
-                img = '<img src="Images/Npion.png">';
-            if(n==10)
-                img = '<img onmouseover="action(this.id)" src=""Images/Bpion.png">';
+                img = '<img src="Images/NPion.png" width=40px height=40px >';
             if(n==9)
-                img = '<img onmouseover="action(this.id)" src=""Images/Bpion.png">';
+                img = '<img onmouseover="action(this.id)" src="Images/BPion.png" width=40px height=40px>';
             if(n==8)
-                img = '<img onmouseover="action(this.id)" src="Images/Bpion.png">';
+                img = '<img onmouseover="action(this.id)" src="Images/BPion.png" width=40px height=40px>';
+            if(n==7)
+                img = '<img onmouseover="action(this.id)" src="Images/BPion.png" width=40px height=40px>';
+            }
             o=o+'<td id =c'+n+'-l'+b+' class = '+color+'>'+img+'</td>'; 
         }
         o+='</tr>'; 
