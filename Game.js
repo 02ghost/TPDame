@@ -23,7 +23,7 @@ window.onload =  function(){
             if(n==8)
                 img = '<img src="Images/BPion.png" width=40px height=40px>';
             if(n==7)
-                img = '<src="Images/BPion.png" width=40px height=40px>';
+                img = '<img src="Images/BPion.png" width=40px height=40px>';
             }
             o=o+'<td id =c'+n+'-l'+b+' class = '+color+'>'+img+'</td>'; 
         }
@@ -34,10 +34,10 @@ document.getElementById('plateau').innerHTML = o;
     
 $('img')
     .mouseover(function() {
-console.log("Selection");
+$('this.parent.class').html("select");
 })
 .mouseout(function() {
-console.log("Deselection");
+$('this.parent.class').html("blanc");
 });
     
    };
