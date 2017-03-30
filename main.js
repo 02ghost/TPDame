@@ -30,7 +30,7 @@ window.onload =  function(){
                     img = '<img src="images/pb.png" width=70px height=70px>';
             }
 
-            o=o+'<td id =c'+n+'-l'+b+' class = '+color+'>'+img+'</td>'; 
+            o=o+'<td id= c'+n+'-l'+b+' class = '+color+'>'+img+'</td>'; 
         }
         o+='</tr>'; 
     }
@@ -42,10 +42,26 @@ window.onload =  function(){
     $('img')
     .mouseover(function() {
         $(this).parent().attr('class', 'select')
+        var a = $(this).parent().attr('id');
+        var b = parseInt(a.substring(2,1));
+        var c = parseInt(a.substring(5,4));
+        var case2 = "c"+ (b+1) + "-l" + (c+1);
+        var case1 = "c"+ (b+1) + "-l" + (c-1);
+        console.log(case1, case2);
+        $("#"+case1).attr('class', 'select')
+        $("#"+case2).attr('class', 'select')
     })
     .mouseout(function() {
         if(!click)
             $(this).parent().attr('class', 'noir')
+        var a = $(this).parent().attr('id');
+        var b = parseInt(a.substring(2,1));
+        var c = parseInt(a.substring(5,4));
+        var case2 = "c"+ (b+1) + "-l" + (c+1);
+        var case1 = "c"+ (b+1) + "-l" + (c-1);
+        console.log(case1, case2);
+        $("#"+case1).attr('class', 'noir')
+        $("#"+case2).attr('class', 'noir')
         click = false;
     })
     .mouseup(function(){
