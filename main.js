@@ -47,7 +47,6 @@ window.onload =  function(){
         var c = parseInt(a.substring(5,4));
         var case2 = "c"+ (b+1) + "-l" + (c+1);
         var case1 = "c"+ (b+1) + "-l" + (c-1);
-        console.log(case1, case2);
         $("#"+case1).attr('class', 'select')
         $("#"+case2).attr('class', 'select')
     })
@@ -59,7 +58,6 @@ window.onload =  function(){
         var c = parseInt(a.substring(5,4));
         var case2 = "c"+ (b+1) + "-l" + (c+1);
         var case1 = "c"+ (b+1) + "-l" + (c-1);
-        console.log(case1, case2);
         $("#"+case1).attr('class', 'noir')
         $("#"+case2).attr('class', 'noir')
         click = false;
