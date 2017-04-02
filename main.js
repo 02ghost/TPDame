@@ -20,10 +20,6 @@ window.onload =  function(){
                     img = '<img src="images/pn.png" alt="ok" width=70px height=70px >';
                 if(n==3)
                     img = '<img src="images/pn.png" alt="ok" width=70px height=70px>';
-                /*if(n==4)
-                    img = '<img src="" width=70px height=70px>';
-                if(n==5)
-                    img = '<img src="" width=70px height=70px>';*/
                 if(n==6)
                     img = '<img src="images/pb.png" alt="ok" width=70px height=70px>';
                 if(n==7)
@@ -95,22 +91,22 @@ window.onload =  function(){
 
     .mouseout(function() {
         if(!click){
-         var a = $(this).parent().attr('id');
-         var b = parseInt(a.substring(2,1));
-         var c = parseInt(a.substring(5,4));
-         var case2 = "c"+ (b+1) + "-l" + (c+1);
-         var case1 = "c"+ (b+1) + "-l" + (c-1);
-         var case4 = "c"+ (b-1) + "-l" + (c+1);
-         var case3 = "c"+ (b-1) + "-l" + (c-1);
+           var a = $(this).parent().attr('id');
+           var b = parseInt(a.substring(2,1));
+           var c = parseInt(a.substring(5,4));
+           var case2 = "c"+ (b+1) + "-l" + (c+1);
+           var case1 = "c"+ (b+1) + "-l" + (c-1);
+           var case4 = "c"+ (b-1) + "-l" + (c+1);
+           var case3 = "c"+ (b-1) + "-l" + (c-1);
 
-         $(this).parent().attr('class', 'noir')
-         $("#"+case1).attr('class', 'noir')
-         $("#"+case2).attr('class', 'noir')
-         $("#"+case3).attr('class', 'noir')
-         $("#"+case4).attr('class', 'noir')
-         click = false;
-     }
- })
+           $(this).parent().attr('class', 'noir')
+           $("#"+case1).attr('class', 'noir')
+           $("#"+case2).attr('class', 'noir')
+           $("#"+case3).attr('class', 'noir')
+           $("#"+case4).attr('class', 'noir')
+           click = false;
+       }
+   })
 
 
 
@@ -135,15 +131,29 @@ window.onload =  function(){
         var c = parseInt(a.substring(5,4));
         var case2 = "c"+ (b-1) + "-l" + (c+1);
         var case1 = "c"+ (b-1) + "-l" + (c-1);
+        var cased = "c"+ b + "-l" + (c+2);
+        var caseg = "c"+ b + "-l" + (c-2);
 
         if(click2 == true){
             if($(this).attr('class') == "select"){
                 $(this).prepend('<img src="images/pn.png" alt="ok" width=70px height=70px>');
-                if($("#" + case1).attr('class') == "select"){
+                $(this).attr("class", "noir")
+                if($("#" + case1).attr('class') == "possible"){
                     $("#" + case1).children().remove();
+                    $("#" + case1).attr("class", "noir")
+                    $("#" + cased).attr("class", "noir")
+                    $("#" + caseg).attr("class", "noir")
+                    click = false;
+                    click2 = false;
                 }
-                if($("#" + case2).attr('class') == "select"){
+                if($("#" + case2).attr('class') == "possible"){
+                    console.log("bon");
                     $("#" + case2).children().remove();
+                    $("#" + case2).attr("class", "noir")
+                    $("#" + cased).attr("class", "noir")
+                    $("#" + caseg).attr("class", "noir")
+                    click = false;
+                    click2 = false;
                 }
             }
         }
