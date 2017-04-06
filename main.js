@@ -1,5 +1,5 @@
 window.onload =  function(){
-    var o="<table border=1>"
+    var o="<div class='begin'> <table border=1>"
     var i=0;
     var color;
     var img;
@@ -32,17 +32,65 @@ window.onload =  function(){
 
             o=o+'<td id= c'+n+'-l'+b+' class = '+color+'>'+img+'</td>'; 
         }
-        o+='</tr>'; 
+        o+='</tr></div>'; 
     }
 
     document.getElementById('plateau').innerHTML = o;
+    $("td").preventDefault;
 
+    update();
+};
+
+res = function(){
+    var o="<div class='begin'> <table border=1>"
+    var i=0;
+    var color;
+    var img;
+    for (let n=0;n<10;n++){
+        o+='<tr>';
+        for(let b=0;b<10;b++){
+            if((n+b)%2==0)
+                color = 'blanc';
+            else
+                color = 'noir';
+            img="";
+            if((n+b)%2==1){
+                if(n==0)
+                    img = '<img src="images/pn.png" alt="ok" width=70px height=70px>';
+                if(n==1)
+                    img = '<img src="images/pn.png" alt="ok" width=70px height=70px>';
+                if(n==2)
+                    img = '<img src="images/pn.png" alt="ok" width=70px height=70px >';
+                if(n==3)
+                    img = '<img src="images/pn.png" alt="ok" width=70px height=70px>';
+                if(n==6)
+                    img = '<img src="images/pb.png" alt="ok" width=70px height=70px>';
+                if(n==7)
+                    img = '<img src="images/pb.png" alt="ok" width=70px height=70px>';
+                if(n==8)
+                    img = '<img src="images/pb.png" alt="ok" width=70px height=70px>';
+                if(n==9)
+                    img = '<img src="images/pb.png" alt="ok" width=70px height=70px>';
+            }
+
+            o=o+'<td id= c'+n+'-l'+b+' class = '+color+'>'+img+'</td>'; 
+        }
+        o+='</tr></div>'; 
+    }
+    $(".plat").replaceWith(o);
+
+    update();
+}
+
+
+update = function(){
     var click=false;
     var click2=false;
     var click3;
+    var ok = true;
 
     $('img')
-    .mouseover(function() {
+    .mouseover(function(e) {
         var a = $(this).parent().attr('id');
         var b = parseInt(a.substring(2,1));
         var c = parseInt(a.substring(5,4));
@@ -109,25 +157,8 @@ window.onload =  function(){
        }
    })
 
-
-
-    .mouseup(function(){
-        if(!click){
-            $(this).parent().attr('class', 'possible')
-            click = true;
-            click2 = true;
-            click3 = $(this).attr("src");
-        }
-        else{
-            if($(this).parent().attr('class') == 'possible'){
-                $(this).parent().attr('class', 'noir')
-                click = false;
-            }
-        }
-    })
-
     $('td')
-    .mouseup(function(){
+    .mouseup(function(e){
         var a = $(this).attr('id');
         var b = parseInt(a.substring(2,1));
         var c = parseInt(a.substring(5,4));
@@ -137,6 +168,19 @@ window.onload =  function(){
         var case3 = "c"+ (b+1) + "-l" + (c-1);
         var cased = "c"+ b + "-l" + (c+2);
         var caseg = "c"+ b + "-l" + (c-2);
+
+        if(!click){
+            $(this).attr('class', 'possible')
+            click = true;
+            click2 = true;
+            click3 = $(this).children().attr("src");
+        }
+        else{
+            if($(this).attr('class') == 'possible'){
+                $(this).attr('class', 'noir')
+                click = false;
+            }
+        }
 
         if(click2 == true){
             if($(this).attr('class') == "select"){
@@ -159,14 +203,16 @@ window.onload =  function(){
                        click = false;
                        click2 = false;
                    }
+                   $(this).children().preventDefault;
+                   update();
                }
+
                if(click3 == "images/pb.png"){
-                console.log("bon");
                 $(this).prepend('<img src="images/pb.png" alt="ok" width=70px height=70px>');
                 $(this).attr("class", "noir")
                 if($("#" + case2).attr('class') == "possible"){
-                    $("#" + case3).children().remove();
-                    $("#" + case3).attr("class", "noir")
+                    $("#" + case4).children().remove();
+                    $("#" + case4).attr("class", "noir")
                     $("#" + cased).attr("class", "noir")
                     $("#" + caseg).attr("class", "noir")
                     click = false;
@@ -180,8 +226,12 @@ window.onload =  function(){
                     click = false;
                     click2 = false;
                 }
+                $(this).children().preventDefault;
+                update();
             }
         }
     }
-})   
-};
+}) 
+
+    
+}
