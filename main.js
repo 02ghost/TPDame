@@ -42,6 +42,7 @@ window.onload =  function(){
         }
         o+='</tr>'; 
     }
+    o+='<div class="cadre"><p>Joueur : Noir</p></div>';
     document.getElementById('plateau').innerHTML = o;
 
     update();
@@ -60,6 +61,12 @@ update = function(){
 
     $('td')
     .mouseover(function() {
+        if(nbpionb == 0){
+            alert("Le joueur possédant les pions noirs a gagné !!!!!");
+        }
+        if(nbpionn == 0){
+            alert("Le joueur possédant les pions blancs a gagné !!!!!");
+        }
         var a = $(this).attr('id');
         var b = parseInt(a.substring(2,1));
         var c = parseInt(a.substring(5,4));
@@ -105,6 +112,48 @@ update = function(){
                         $(this).attr('class', 'error')
                     }
                 }
+                if($(this).children().attr('src') == 'images/pnd.png'){
+                    ok1 = false;
+                    ok2 = false;
+                    b = b+1;
+                    d = c;
+                    c = c-1;
+                    d = d+1;
+
+                    if($("#c"+ b + "-l" + (c+1)).children().attr('src') == 'images/pn.png' && $("#c"+ b + "-l" + (c-1)).children().attr('src') == 'images/pn.png'){
+                        $(this).attr('class', 'error');
+                    }
+
+                    while(ok1 == false || ok2 == false){
+                        if(ok1 == false){
+                            if($("#c"+ b + "-l" + c).children().attr('src') == undefined || $("#c"+ b + "-l" + c).children().attr('src') == 'images/pb.png'){
+                                if($("#c"+ b + "-l" + c).children().attr('src') == 'images/pb.png'){
+                                    c = c-1;
+                                }
+                                else{
+                                    $("#c"+ b + "-l" + c).attr('class', 'select');
+                                    c = c-1;
+                                }
+                            }
+                            else{
+                                ok1 = true;
+                            }
+                        }
+                        if(ok2 == false){
+                            if($("#c"+ b + "-l" + d).children().attr('src') == undefined || $("#c"+ b + "-l" + d).children().attr('src') == 'images/pb.png'){
+                                if($("#c"+ b + "-l" + c).children().attr('src') == 'images/pb.png'){
+                                    d = d+1;
+                                }
+                                else{
+                                    $("#c"+ b + "-l" + d).attr('class', 'select');
+                                    d = d+1;
+                                }
+
+                            }
+                        }
+                        b = b+1;
+                    }
+                }
             }
             if(play == "white"){
                 if($(this).children().attr('src') == 'images/pb.png'){
@@ -136,6 +185,48 @@ update = function(){
                     }
                     if(ok == false){
                         $(this).attr('class', 'error')
+                    }
+                }
+                if($(this).children().attr('src') == 'images/pbd.png'){
+                    ok1 = false;
+                    ok2 = false;
+                    b = b-1;
+                    d = c;
+                    c = c-1;
+                    d = d+1;
+
+                    if($("#c"+ b + "-l" + (c+1)).children().attr('src') == 'images/pb.png' && $("#c"+ b + "-l" + (c-1)).children().attr('src') == 'images/pb.png'){
+                        $(this).attr('class', 'error');
+                    }
+
+                    while(ok1 == false || ok2 == false){
+                        if(ok1 == false){
+                            if($("#c"+ b + "-l" + c).children().attr('src') == undefined || $("#c"+ b + "-l" + c).children().attr('src') == 'images/pn.png'){
+                                if($("#c"+ b + "-l" + c).children().attr('src') == 'images/pn.png'){
+                                    c = c-1;
+                                }
+                                else{
+                                    $("#c"+ b + "-l" + c).attr('class', 'select');
+                                    c = c-1;
+                                }
+                            }
+                            else{
+                                ok1 = true;
+                            }
+                        }
+                        if(ok2 == false){
+                            if($("#c"+ b + "-l" + d).children().attr('src') == undefined || $("#c"+ b + "-l" + d).children().attr('src') == 'images/pn.png'){
+                                if($("#c"+ b + "-l" + c).children().attr('src') == 'images/pn.png'){
+                                    d = d+1;
+                                }
+                                else{
+                                    $("#c"+ b + "-l" + d).attr('class', 'select');
+                                    d = d+1;
+                                }
+
+                            }
+                        }
+                        b = b-1;
                     }
                 }
             }
@@ -196,17 +287,19 @@ update = function(){
                 if($("#" + case5).attr('class') == "possible"){
                     $("#" + case1).children().remove();
                     $("#" + case5).children().remove();
-                     nbpionb = nbpionb - 1;
+                    nbpionb = nbpionb - 1;
                 }
                 if($("#" + case6).attr('class') == "possible"){
                     $("#" + case2).children().remove();
                     $("#" + case6).children().remove();
-                     nbpionb = nbpionb - 1;
+                    nbpionb = nbpionb - 1;
                 }
                 if(b == 9){
                     $(this).children().remove();
                     $(this).prepend('<img src="images/pnd.png" alt="ok" width=70px height=70px>')
                 }
+                $('p').remove();
+                $('.cadre').prepend('<p> Joueur : Blanc </p>');
                 resnoir();
                 click = false;
                 click2 = false;
@@ -236,6 +329,12 @@ update = function(){
                     $(this).children().remove();
                     $(this).prepend('<img src="images/pbd.png" alt="ok" width=70px height=70px>')
                 }
+                if(b == 9){
+                    $(this).children().remove();
+                    $(this).prepend('<img src="images/pnd.png" alt="ok" width=70px height=70px>')
+                }
+                $('p').remove();
+                $('.cadre').prepend('<p> Joueur : Noir </p>');
                 resnoir();
                 click = false;
                 click2 = false;
@@ -243,7 +342,6 @@ update = function(){
                 $(this).children().preventDefault;
             }
         }
-
         ok = false;
     }
 })}
