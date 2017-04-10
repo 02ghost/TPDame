@@ -55,6 +55,8 @@ update = function(){
     var click3;
     var ok = false;
     var play = "black";
+    var nbpionb = 20;
+    var nbpionn = 20;
 
     $('td')
     .mouseover(function() {
@@ -141,14 +143,14 @@ update = function(){
 
 .mouseout(function() {
     if(!click){
-     var a = $(this).attr('id');
+       var a = $(this).attr('id');
 
-     if($(this).attr('class') == "select" || $(this).attr('class') == "error"){
-      resnoir();
-      click = false;
-      ok = false;
+       if($(this).attr('class') == "select" || $(this).attr('class') == "error"){
+          resnoir();
+          click = false;
+          ok = false;
+      }
   }
-}
 })
 
 .mouseup(function(){
@@ -194,10 +196,12 @@ update = function(){
                 if($("#" + case5).attr('class') == "possible"){
                     $("#" + case1).children().remove();
                     $("#" + case5).children().remove();
+                     nbpionb = nbpionb - 1;
                 }
                 if($("#" + case6).attr('class') == "possible"){
                     $("#" + case2).children().remove();
                     $("#" + case6).children().remove();
+                     nbpionb = nbpionb - 1;
                 }
                 if(b == 9){
                     $(this).children().remove();
@@ -221,10 +225,12 @@ update = function(){
                 if($("#" + case7).attr('class') == "possible"){
                     $("#" + case3).children().remove();
                     $("#" + case7).children().remove();
+                    nbpionn = nbpionn - 1;
                 }
                 if($("#" + case8).attr('class') == "possible"){
                     $("#" + case4).children().remove();
                     $("#" + case8).children().remove();
+                    nbpionn = nbpionn - 1;
                 }
                 if(b == 0){
                     $(this).children().remove();
@@ -244,7 +250,7 @@ update = function(){
 
 resnoir = function(){
 
-   for (let n=0;n<10;n++){
+ for (let n=0;n<10;n++){
     for(let b=0;b<10;b++){
         if($("#c"+ n + "-l" + b).attr("class") == "noir" || $("#c"+ n + "-l" + b).attr("class") == "select" || $("#c"+ n + "-l" + b).attr("class") == "possible" || $("#c"+ n + "-l" + b).attr("class") == "error"){
             $("#c"+ n + "-l" + b).attr("class", "noir")
