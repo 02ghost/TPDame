@@ -199,6 +199,10 @@ update = function(){
                     $("#" + case2).children().remove();
                     $("#" + case6).children().remove();
                 }
+                if(b == 9){
+                    $(this).children().remove();
+                    $(this).prepend('<img src="images/pnd.png" alt="ok" width=70px height=70px>')
+                }
                 resnoir();
                 click = false;
                 click2 = false;
@@ -221,6 +225,10 @@ update = function(){
                 if($("#" + case8).attr('class') == "possible"){
                     $("#" + case4).children().remove();
                     $("#" + case8).children().remove();
+                }
+                if(b == 0){
+                    $(this).children().remove();
+                    $(this).prepend('<img src="images/pbd.png" alt="ok" width=70px height=70px>')
                 }
                 resnoir();
                 click = false;
